@@ -1,0 +1,20 @@
+<root>
+  <data name="MainForm.Text" xml:space="preserve">
+    <value>CNC Pulse</value>
+  </data>
+  <data name="buttonUploadFile.Text" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="buttonReviewQuarantined.Text" xml:space="preserve">
+    <value>Review Quarantined Files</value>
+  </data>
+  <data name="buttonAskAI.Text" xml:space="preserve">
+    <value>Ask AI</value>
+  </data>
+  <data name="textBoxAIPrompt.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="richTextBoxAIResponse.Text" xml:space="preserve">
+    <value></value>
+  </data>
+</root>
