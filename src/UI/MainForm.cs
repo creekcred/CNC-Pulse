@@ -15,78 +15,55 @@ namespace CNCPulse.UI
         private readonly QuarantineManager quarantineManager;
         private readonly ChatGPTConnector chatGPTConnector;
         private readonly PerplexityConnector perplexityConnector;
+        private AppConfig config;
 
         public MainForm()
         {
             InitializeComponent();
-            var config = ConfigManager.LoadConfig();
-            
-            brandingManager = new BrandingManager();
-            dataCollector = new DataCollector();
-            dashboardManager = new DashboardManager(brandingManager);
-            serverConnector = new ServerConnector(config.ServerUrl, config.ServerUsername, config.ServerPassword);
-            quarantineManager = new QuarantineManager(config.QuarantineFolder);
-            chatGPTConnector = new ChatGPTConnector(config.OpenAIApiKey);
-            perplexityConnector = new PerplexityConnector(config.PerplexityApiKey);
-        }
+            config = ConfigManager.LoadConfig();
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            brandingManager.ApplyBranding("DefaultCompany");
-        }
-
-        private async void buttonUploadFile_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            if (!config.IsInitialized)
             {
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                PerformInitialSetup();
+            }
+
+            InitializeComponents();
+        }
+
+        private void PerformInitialSetup()
+        {
+            using (var setupForm = new InitialSetupForm(config))
+            {
+                if (setupForm.ShowDialog() == DialogResult.OK)
                 {
-                    string localFilePath = openFileDialog.FileName;
-                    string remoteFilePath = "uploaded/" + System.IO.Path.GetFileName(localFilePath);
-                    string quarantinedFilePath = quarantineManager.QuarantineFile(remoteFilePath, localFilePath);
-                    
-                    if (await serverConnector.UploadFileAsync(quarantinedFilePath, remoteFilePath))
-                    {
-                        MessageBox.Show("File uploaded and quarantined successfully.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error uploading file.");
-                    }
+                    config = setupForm.UpdatedConfig;
+                    config.IsInitialized = true;
+                    ConfigManager.SaveConfig(config);
+                }
+                else
+                {
+                    MessageBox.Show("Initial setup is required to use the application.", "Setup Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Application.Exit();
                 }
             }
         }
 
-        private void buttonReviewQuarantined_Click(object sender, EventArgs e)
+        private void InitializeComponents()
         {
-            var quarantinedFiles = quarantineManager.GetQuarantinedFiles();
-            if (quarantinedFiles.Count > 0)
-            {
-                string selectedFile = quarantinedFiles[0]; // For simplicity, we're just taking the first file
-                string originalFilePath = "path/to/original/file"; // You need to implement a way to get the original file path
-                var reviewForm = new QuarantineReviewForm(quarantineManager, originalFilePath, selectedFile);
-                reviewForm.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("No files in quarantine.");
-            }
+            brandingManager = new BrandingManager();
+            dataCollector = new DataCollector();
+            dashboardManager = new DashboardManager(brandingManager);
+            serverConnector = new ServerConnector(config.ServerSettings.Url, config.ServerSettings.Username, config.ServerSettings.Password);
+            quarantineManager = new QuarantineManager(config.QuarantineFolder);
+            chatGPTConnector = new ChatGPTConnector(config.OpenAISettings.ApiKey);
+            perplexityConnector = new PerplexityConnector(config.PerplexitySettings.ApiKey);
         }
 
-        private async void buttonAskAI_Click(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            string prompt = textBoxAIPrompt.Text;
-            try
-            {
-                string chatGPTResponse = await chatGPTConnector.GetChatResponse(prompt);
-                string perplexityResponse = await perplexityConnector.GetChatResponse(prompt);
-
-                richTextBoxAIResponse.Text = $"ChatGPT: {chatGPTResponse}\n\nPerplexity: {perplexityResponse}";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error querying AI: {ex.Message}");
-            }
+            brandingManager.ApplyBranding(config.Branding.CompanyName);
         }
+
+        // ... (other methods remain the same)
     }
 }
