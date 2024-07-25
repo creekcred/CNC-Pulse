@@ -1,0 +1,214 @@
+{
+  "Machines": [
+    {
+      "MachineId": "HM-1",
+      "Name": "HM-1",
+      "FileSettings": {
+        "CAP": "D",
+        "EXTDN": ".ncc",
+        "EXTUP": ".ncc"
+      },
+      "Communication": {
+        "PORTSPEED": 4800,
+        "BITS": {
+          "DataBits": 8,
+          "StopBits": 1,
+          "Parity": 0
+        },
+        "SHAKEPROTO": {
+          "X": 0,
+          "Y": 0
+        },
+        "DELAYS": 0,
+        "EOBCC": {
+          "X": 0,
+          "Y": 0
+        },
+        "FSPECDN": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "FSPECUP": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "LEADER": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        }
+      }
+    },
+    {
+      "MachineId": "HM-2",
+      "Name": "HM-2",
+      "FileSettings": {
+        "CAP": "D",
+        "EXTDN": ".ncc",
+        "EXTUP": ".ncc"
+      },
+      "Communication": {
+        "PORTSPEED": 4800,
+        "BITS": {
+          "DataBits": 8,
+          "StopBits": 1,
+          "Parity": 0
+        },
+        "SHAKEPROTO": {
+          "X": 0,
+          "Y": 0
+        },
+        "DELAYS": 0,
+        "EOBCC": {
+          "X": 0,
+          "Y": 0
+        },
+        "FSPECDN": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "FSPECUP": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "LEADER": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        }
+      }
+    },
+    {
+      "MachineId": "LSR-1",
+      "Name": "LASERDYNE 795",
+      "FileSettings": {
+        "CAP": "D",
+        "EXTDN": ".ncc",
+        "EXTUP": ".ncc"
+      },
+      "Communication": {
+        "PORTSPEED": 9600,
+        "BITS": {
+          "DataBits": 7,
+          "StopBits": 2,
+          "Parity": 2
+        },
+        "SHAKEPROTO": {
+          "X": 1,
+          "Y": 0
+        },
+        "DELAYS": 0,
+        "EOBCC": {
+          "X": 0,
+          "Y": 0
+        },
+        "FSPECDN": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "FSPECUP": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "LEADER": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        }
+      }
+    },
+    {
+      "MachineId": "VM-1-Send",
+      "Name": "MV-1000 Send",
+      "FileSettings": {
+        "CAP": "B",
+        "DIRDN": "C:\\MV-1000",
+        "DIRUP": "C:\\MV-1000",
+        "EXTDN": ".ncc",
+        "EXTUP": ".ncc"
+      },
+      "Communication": {
+        "PORTSPEED": 4800,
+        "BITS": {
+          "DataBits": 7,
+          "StopBits": 2,
+          "Parity": 2
+        },
+        "SHAKEPROTO": {
+          "X": 1,
+          "Y": 0
+        },
+        "DELAYS": 0,
+        "EOBCC": {
+          "X": 0,
+          "Y": 0
+        },
+        "FSPECDN": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "FSPECUP": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "LEADER": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        }
+      }
+    },
+    {
+      "MachineId": "VM-1-Receive",
+      "Name": "MV-1000 Receive",
+      "FileSettings": {
+        "CAP": "B",
+        "DIRDN": "C:\\MV-1000",
+        "DIRUP": "C:\\MV-1000",
+        "EXTDN": ".ncc",
+        "EXTUP": ".ncc"
+      },
+      "Communication": {
+        "PORTSPEED": 300,
+        "BITS": {
+          "DataBits": 7,
+          "StopBits": 2,
+          "Parity": 2
+        },
+        "SHAKEPROTO": {
+          "X": 1,
+          "Y": 0
+        },
+        "DELAYS": 0,
+        "EOBCC": {
+          "X": 0,
+          "Y": 0
+        },
+        "FSPECDN": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "FSPECUP": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "LEADER": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        }
+      }
+    }
+    // Continue adding the other machines with similar structure
+  ]
+}
